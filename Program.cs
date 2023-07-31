@@ -1,26 +1,38 @@
-﻿//Задача 27: Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.
-//452 -> 11
-//82 -> 10
-//9012 -> 12
+﻿/*
+ Задача 68: Напишите программу вычисления функции Аккермана с помощью рекурсии. 
+ Даны два неотрицательных числа m и n.
+ m = 2, n = 3 -> A(m,n) = 9
+ m = 3, n = 2 -> A(m,n) = 29
+ */
+ 
+Console.Write("Введите число M: ");
+int m = Convert.ToInt32(Console.ReadLine());
 
-Console.WriteLine($"Выдаёт сумму цифр в числе");
 Console.Write("Введите число N: ");
-int numberN = Convert.ToInt32(Console.ReadLine());
+int n = Convert.ToInt32(Console.ReadLine());
 
-  int SumNumber(int numberN)
-  {
-    
-    int counter = Convert.ToString(numberN).Length;
-    int advance = 0;
-    int result = 0;
+AkkermanFunction(m,n);
 
-    for (int i = 0; i < counter; i++){
-      advance = numberN - numberN % 10;
-      result = result + (numberN - advance);
-      numberN = numberN / 10;
+
+// вызов функции Аккермана
+void AkkermanFunction(int m, int n)
+{
+    Console.Write(Akkerman(m, n)); 
+}
+
+// функция Аккермана
+int Akkerman(int m, int n)
+{
+    if (m == 0)
+    {
+        return n + 1;
     }
-   return result;
-  }
-
-int sumNumber = SumNumber(numberN);
-Console.WriteLine("Сумма цифр в числе: " + sumNumber);
+    else if (n == 0 && m > 0)
+    {
+        return Akkerman(m - 1, 1);
+    }
+    else
+    {
+        return (Akkerman(m - 1, Akkerman(m, n - 1)));
+    }
+}
